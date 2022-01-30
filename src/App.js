@@ -1,18 +1,19 @@
 import "./App.css";
 import Member from "./Member";
-import Home from "./Home";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
-  return (
-    
+  return (    
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="member" element={<Member />}></Route>
+          <Route index path="/" element={<Member />} />
+          {/* <Route path="admin"> */}
+            {/* <Route path="rekap" element={<Rekap />} /> */}
+            {/* <Route path="pembayaran" element={<Pembayaran />} /> */}
+            {/* <Route path="dapur" element={<Admin />} /> */}
+          {/* </Route> */}
         </Routes>
-      </BrowserRouter>
-    
+      </BrowserRouter>    
   );
 }
 
