@@ -26,7 +26,7 @@ export default function Member() {
     duduk: "",
     keranjang: [],
   });
-  let newPesanan = [...pesanan];
+  let newPesanan = {...pesanan};
   let { keranjang } = newPesanan;
 
   const pesan = (v) => {
