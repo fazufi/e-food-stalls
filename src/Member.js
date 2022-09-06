@@ -26,8 +26,8 @@ export default function Member() {
     duduk: "",
     keranjang: [],
   });
-  let cPesanan = JSON.parse(JSON.stringify(pesanan));
-  let { keranjang } = cPesanan;
+  let newPesanan = [...pesanan];
+  let { keranjang } = newPesanan;
 
   const pesan = (v) => {
     const isExist = keranjang.find((x) => x.id === v.id);
@@ -43,13 +43,13 @@ export default function Member() {
         keterangan: "",
       });
     }
-    setPesanan(cPesanan);
+    setPesanan(newPesanan);
   };
 
   const plus = (i) => {
     keranjang[i].jumlah++;
     keranjang[i].total += keranjang[i].harga;
-    setPesanan(cPesanan);
+    setPesanan(newPesanan);
   };
   const minus = (i) => {
     if (keranjang[i].jumlah > 1) {
@@ -58,24 +58,24 @@ export default function Member() {
     } else {
       keranjang.splice(i, 1);
     }
-    setPesanan(cPesanan);
+    setPesanan(newPesanan);
   };
   const viewInput = (i) => {
     keranjang[i].isKet = true;
-    setPesanan(cPesanan);
+    setPesanan(newPesanan);
   };
   const saveKet = (e, i) => {
     keranjang[i].keterangan = e.target.value;
-    setPesanan(cPesanan);
+    setPesanan(newPesanan);
   };
   const delKet = (i) => {
     keranjang[i].isKet = false;
     keranjang[i].keterangan = "";
-    setPesanan(cPesanan);
+    setPesanan(newPesanan);
   };
   const delItempesanan = (i) => {
     keranjang.splice(i, 1);
-    setPesanan(cPesanan);
+    setPesanan(newPesanan);
   };
   const allTotal = keranjang.reduce(
     (akumulator, currentValue) => akumulator + currentValue.total,
@@ -92,7 +92,7 @@ export default function Member() {
             <input
               type="checkbox"
               onClick={(e) =>
-                setPesanan({ ...cPesanan, isBungkus: e.target.checked })
+                setPesanan({ ...newPesanan, isBungkus: e.target.checked })
               }
             />
             <label className="ml-1">BUNGKUS</label>
@@ -102,7 +102,7 @@ export default function Member() {
             <label>Pembeli:</label>
             <input
               onChange={debounce(
-                (e) => setPesanan({ ...cPesanan, name: e.target.value }),
+                (e) => setPesanan({ ...newPesanan, name: e.target.value }),
                 1000
               )}
               placeholder="atas nama"
@@ -110,12 +110,12 @@ export default function Member() {
             />
           </div>
 
-          {!cPesanan.isBungkus && (
+          {!newPesanan.isBungkus && (
             <div>
               <label>Tempat duduk:</label>
               <select
                 onClick={(e) =>
-                  setPesanan({ ...cPesanan, duduk: e.target.value })
+                  setPesanan({ ...newPesanan, duduk: e.target.value })
                 }
               >
                 <option>---</option>
